@@ -20,6 +20,7 @@ std::vector<uint8_t> get_image()
 {
   // Open the file:
     std::streampos fileSize;
+    //we specify which file we want
     std::ifstream file("cat.jpg", std::ios::binary);
 
     // get its size:

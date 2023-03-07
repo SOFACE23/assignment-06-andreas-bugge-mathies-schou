@@ -15,17 +15,18 @@
 
 using boost::asio::ip::tcp;
 
-//sets the size of the image, we choose these values by the pictures properties
-constexpr size_t image_size = 480*360;
+//sets the size of the image in bytes
+constexpr size_t image_size = 17618;
 
 void save_image(char* data, size_t len)
 {
-  static int image_count = 0;
-  std::string filename = "copycat" + std::to_string(image_count) + ".jpg";
-  std::ofstream file(filename, std::ios::out | std::ios::binary);
-  file.write(data, len);
-  file.close();
-  image_count++;
+  //we name the copied image 
+  std::ofstream file("copycat.jpg");
+  //we make a forloop to to get the length, so we get the data transferred form the file to new file. 
+  for(size_t i = 0; i < len; i++)
+  {
+  file << data[i];
+  }
 }
 
 int main(int argc, char* argv[])
