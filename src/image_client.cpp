@@ -11,14 +11,21 @@
 #include <iostream>
 #include <boost/array.hpp>
 #include <boost/asio.hpp>
+#include <fstream>
 
 using boost::asio::ip::tcp;
 
-constexpr size_t image_size = 100*100;
+//sets the size of the image, we choose these values by the pictures properties
+constexpr size_t image_size = 480*360;
 
 void save_image(char* data, size_t len)
 {
-  // TODO
+  static int image_count = 0;
+  std::string filename = "copycat" + std::to_string(image_count) + ".jpg";
+  std::ofstream file(filename, std::ios::out | std::ios::binary);
+  file.write(data, len);
+  file.close();
+  image_count++;
 }
 
 int main(int argc, char* argv[])

@@ -13,23 +13,27 @@
 #include <boost/asio.hpp>
 
 using boost::asio::ip::tcp;
-// hej
+
 int main(int argc, char* argv[])
 {
   try
   {
+    // Check command line arguments, if not enough, print usage and exit with error.
     if (argc != 2)
     {
       std::cerr << "Usage: client <host>" << std::endl;
       return 1;
     }
 
+    // Create a context for the io_service.
     boost::asio::io_context io_context;
 
+    
     tcp::resolver resolver(io_context);
     tcp::resolver::results_type endpoints =
       resolver.resolve(argv[1], "daytime");
 
+  
     tcp::socket socket(io_context);
     boost::asio::connect(socket, endpoints);
 
